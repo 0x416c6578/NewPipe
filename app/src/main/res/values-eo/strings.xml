@@ -296,8 +296,7 @@
     <string name="view">Ludi</string>
     <string name="delete">Forviŝi</string>
     <string name="checksum">Kontrolsumo</string>
-    <string name="add">Nova misio</string>
-    <string name="finish">Bone</string>
+    <string name="ok">Bone</string>
     <string name="msg_name">Dosiernomo</string>
     <string name="msg_threads">Fadenoj</string>
     <string name="msg_error">Eraro</string>
@@ -462,8 +461,6 @@
     <string name="post_processing">postprocesado</string>
     <string name="permission_denied">Ago rifuzita kaŭze de la sistemon</string>
     <string name="download_failed">Elŝuto fiaskis!</string>
-    <string name="download_finished">Elŝuto finita</string>
-    <string name="download_finished_more">%s elĝutoj finitaj</string>
     <string name="generate_unique_name">Generu unikan nomon</string>
     <string name="overwrite">Anstataŭigi</string>
     <string name="download_already_running">Estas elŝuto en progreso kun ĉi tiu nomo</string>
@@ -519,7 +516,6 @@
     <string name="choose_instance_prompt">Elektu instancon</string>
     <string name="clear_download_history">Forviŝi la historion de elŝutoj</string>
     <string name="delete_downloaded_files">Forviŝi elŝutitajn dosierojn</string>
-    <string name="deleted_downloads">%1$d elŝutoj forviŝitaj</string>
     <string name="videos_string">Filmetoj</string>
     <string name="permission_display_over_apps">Doni la permeson por afiŝiĝi supre aliaj apoj</string>
     <string name="app_language_title">Preferata aplingvo</string>
@@ -588,4 +584,28 @@
     <string name="notification_colorize_title">farbi sciigon</string>
     <string name="notification_action_buffering">Alŝuto</string>
     <string name="notification_scale_to_square_image_title">Skali bildeton ĝis 1:1 proportio</string>
+    <string name="off">Malŝatita</string>
+    <string name="on">Ŝaltita</string>
+    <string name="metadata_tags">Etikedoj</string>
+    <string name="download_has_started">Elŝutado komenciĝis</string>
+    <string name="service_provides_reason">%s donas tiun kialon:</string>
+    <string name="georestricted_content">Tiu enaĵo ne disponeblas en via lando.</string>
+    <string name="recent">Freŝaj</string>
+    <string name="video_detail_by">De %s</string>
+    <string name="channel_created_by">Kreita de %s</string>
+    <string name="open_website_license">Malfermi retejon</string>
+    <string name="metadata_privacy_internal">Interna</string>
+    <string name="metadata_privacy_unlisted">Nelistita</string>
+    <string name="metadata_privacy_private">Privata</string>
+    <string name="metadata_privacy_public">Publika</string>
+    <string name="metadata_language">Lingvo</string>
+    <string name="metadata_age_limit">Limo de aĝo</string>
+    <string name="metadata_category">Kategorio</string>
+    <string name="dont_show">Ne montri</string>
+    <string name="low_quality_smaller">Malalta kvalito (malpli larĝa)</string>
+    <string name="high_quality_larger">Alta kvalito (pli larĝa)</string>
+    <string name="never">Neniam</string>
+    <string name="description_tab_description">Priskribo</string>
+    <string name="comments_tab_description">Komentoj</string>
+    <string name="show_description_title">Montri priskribon</string>
 </resources>

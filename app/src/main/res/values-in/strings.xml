@@ -83,8 +83,7 @@
     <string name="start">Mulai</string>
     <string name="pause">Jeda</string>
     <string name="checksum">Ceksum</string>
-    <string name="add">Misi baru</string>
-    <string name="finish">OK</string>
+    <string name="ok">OK</string>
     <string name="msg_name">Nama berkas</string>
     <string name="msg_error">Galat</string>
     <string name="msg_server_unsupported">Server tidak didukung</string>
@@ -426,8 +425,6 @@
     <string name="enqueue">Antre</string>
     <string name="permission_denied">Tindakan ditolak oleh sistem</string>
     <string name="download_failed">Pengunduhan gagal</string>
-    <string name="download_finished">Pengunduhan selesai</string>
-    <string name="download_finished_more">%s unduhan selesai</string>
     <string name="generate_unique_name">Hasilkan nama unik</string>
     <string name="overwrite">Timpa</string>
     <string name="overwrite_finished_warning">File yang diunduh dengan nama ini sudah ada</string>
@@ -514,7 +511,6 @@
     <string name="default_kiosk_page_summary">Kiosk Default</string>
     <string name="clear_download_history">Hapus riwayat unduhan</string>
     <string name="delete_downloaded_files">Hapus berkas yang diunduh</string>
-    <string name="deleted_downloads">%1$d unduhan dihapus</string>
     <string name="permission_display_over_apps">Izinkan untuk ditampilkan di atas aplikasi lain</string>
     <string name="app_language_title">Bahasa apl</string>
     <string name="systems_language">Default sistem</string>
@@ -700,6 +696,11 @@
     <string name="off">Nonaktif</string>
     <string name="on">Aktif</string>
     <string name="tablet_mode_title">Mode tablet</string>
-    <string name="feed_toggle_show_played_items">Tampilkan item yang telah diputar</string>
-    <string name="item_in_history">Dalam Riwayat</string>
+    <string name="feed_toggle_show_played_items">Tampilkan item yang sudah ditonton</string>
+    <string name="dont_show">Jangan tampilkan</string>
+    <string name="low_quality_smaller">Kualitas rendah (lebih kecil)</string>
+    <string name="high_quality_larger">Kualitas tinggi (lebih besar)</string>
+    <string name="comments_are_disabled">Komentar dinonaktifkan</string>
+    <string name="seekbar_preview_thumbnail_title">Pratinjau thumbnail bilah laju</string>
+    <string name="mark_as_watched">Tandai ditonton</string>
 </resources>

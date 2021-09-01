@@ -88,8 +88,7 @@
     <string name="view">Reproducir</string>
     <string name="delete">Borrar</string>
     <string name="checksum">Suma de comprobación</string>
-    <string name="add">Misión nueva</string>
-    <string name="finish">Aceptar</string>
+    <string name="ok">Aceptar</string>
     <string name="msg_name">Nombre del archivo</string>
     <string name="msg_threads">Subprocesos</string>
     <string name="msg_error">Error</string>
@@ -136,7 +135,7 @@
     <string name="player_gesture_controls_title">Controles del reproductor por gestos</string>
     <string name="player_gesture_controls_summary">Usar gestos para controlar el brillo y volumen del reproductor</string>
     <string name="show_search_suggestions_title">Sugerencias de búsqueda</string>
-    <string name="show_search_suggestions_summary">Mostrar sugerencias al buscar</string>
+    <string name="show_search_suggestions_summary">Elegir las sugerencias a mostrar al buscar</string>
     <string name="best_resolution">Mejor resolución</string>
     <string name="title_activity_about">Acerca de NewPipe</string>
     <string name="action_settings">Ajustes</string>
@@ -407,8 +406,6 @@
     <string name="file_deleted">Archivo borrado</string>
     <!-- download notifications -->
     <string name="download_failed">Descarga fallida</string>
-    <string name="download_finished">Descarga finalizada</string>
-    <string name="download_finished_more">%s descargas finalizadas</string>
     <!-- dialog about existing downloads -->
     <string name="generate_unique_name">Generar nombre único</string>
     <string name="overwrite">Sobrescribir</string>
@@ -523,7 +520,6 @@
     <string name="choose_instance_prompt">Elige una instancia</string>
     <string name="clear_download_history">Limpiar historial de descargas</string>
     <string name="delete_downloaded_files">Borrar archivos descargados</string>
-    <string name="deleted_downloads">Borradas %1$d descargas</string>
     <string name="permission_display_over_apps">Permitir mostrar sobre otras aplicaciones</string>
     <string name="app_language_title">Idioma de aplicación</string>
     <string name="systems_language">Predefinido del sistema</string>
@@ -629,7 +625,7 @@
     <string name="notification_action_buffering">Almacenar en memoria (búfer)</string>
     <string name="notification_action_repeat">Repetir</string>
     <string name="notification_actions_at_most_three">¡Puedes seleccionar como máximo tres acciones para mostrar en la notificación compacta!</string>
-    <string name="notification_actions_summary">Edita cada acción de la notificación pulsando sobre ella a continuación. Selecciona hasta tres de ellas para mostrarlas en la notificación compacta usando las casillas de verificación a la derecha</string>
+    <string name="notification_actions_summary">Edita cada acción de la notificación pulsando sobre ella. Selecciona hasta tres de ellas para mostrarlas en la notificación compacta usando las casillas de verificación a la derecha</string>
     <string name="notification_action_4_title">Botón de quinta acción</string>
     <string name="notification_action_3_title">Botón de cuarta acción</string>
     <string name="notification_action_2_title">Botón de tercera acción</string>
@@ -649,7 +645,7 @@
     <string name="show_thumbnail_summary">Usar miniatura como fondo de pantalla de bloqueo y notificaciones</string>
     <string name="show_thumbnail_title">Mostrar vista previa</string>
     <string name="show_meta_info_summary">Desactivar para ocultar información adicional sobre el creador o contenido de la transmisión</string>
-    <string name="show_description_summary">Desactivar para ocultar la descripción del vídeo y la información adicional</string>
+    <string name="show_description_summary">Desactivar para ocultar la descripción del vídeo e información adicional</string>
     <string name="no_app_to_open_intent">Ninguna aplicación en tu dispositivo puede abrir esto</string>
     <string name="chapters">Capítulos</string>
     <string name="recent">Recientes</string>
@@ -674,7 +670,7 @@
     <string name="download_has_started">La descarga ha comenzado</string>
     <string name="recaptcha_solve">Resolver</string>
     <string name="select_night_theme_toast">Puedes seleccionar tu tema nocturno favorito a continuación</string>
-    <string name="night_theme_title">Tema nocturno</string>
+    <string name="night_theme_title">Tema de Noche</string>
     <string name="night_theme_summary">Selecciona tu tema nocturno favorito — %s</string>
     <string name="auto_device_theme_title">Automático (tema del dispositivo)</string>
     <string name="show_channel_details">Mostrar detalles del canal</string>
@@ -713,5 +709,18 @@
     <string name="off">Apagado</string>
     <string name="on">Encendido</string>
     <string name="tablet_mode_title">Modo tableta</string>
-    <string name="feed_toggle_show_played_items">Mostrar elementos reproducidos</string>
+    <string name="feed_toggle_show_played_items">Mostrar elementos vistos</string>
+    <string name="dont_show">No mostrar</string>
+    <string name="low_quality_smaller">Baja calidad (más pequeño)</string>
+    <string name="high_quality_larger">Alta calidad (más grande)</string>
+    <string name="seekbar_preview_thumbnail_title">Miniatura en barra de desplazamiento</string>
+    <string name="comments_are_disabled">Los comentarios están deshabilitados</string>
+    <string name="detail_heart_img_view_description">Valorado por el creador</string>
+    <string name="mark_as_watched">Marcar como visto</string>
+    <string name="show_image_indicators_summary">Mostrar cintas de colores Picasso encima de las imágenes indicando su origen: rojo para la red, azul para el disco y verde para la memoria</string>
+    <string name="loading_channel_details">Cargando detalles del canal…</string>
+    <string name="error_show_channel_details">Error en Mostrar detalles del canal</string>
+    <string name="show_image_indicators_title">Mostrar indicadores de imagen</string>
+    <string name="remote_search_suggestions">Sugerencias de búsqueda remota</string>
+    <string name="local_search_suggestions">Sugerencias de búsqueda local</string>
 </resources>
