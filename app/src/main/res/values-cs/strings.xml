@@ -97,8 +97,7 @@
     <string name="your_comment">Vaše poznámky (anglicky):</string>
     <string name="storage_permission_denied">Nejdříve udělit oprávnění přístupu k úložišti</string>
     <string name="view">Přehrát</string>
-    <string name="add">Nová mise</string>
-    <string name="finish">OK</string>
+    <string name="ok">OK</string>
     <string name="title_activity_recaptcha">Výzva reCAPTCHA</string>
     <string name="recaptcha_request_toast">Požadována výzva reCAPTCHA</string>
     <string name="black_theme_title">Černé</string>
@@ -434,8 +433,6 @@
     <string name="enqueue">Fronta</string>
     <string name="permission_denied">Akce odmítnuta systémem</string>
     <string name="download_failed">Stahování se nezdařilo</string>
-    <string name="download_finished">Stahování dokončeno</string>
-    <string name="download_finished_more">%s stahování dokončeno</string>
     <string name="generate_unique_name">Vytvořit jedinečný název</string>
     <string name="overwrite">Přepsat</string>
     <string name="overwrite_unrelated_warning">Stažený soubor s tímto názvem již existuje</string>
@@ -525,7 +522,6 @@
     <string name="choose_instance_prompt">Vyberte instanci</string>
     <string name="clear_download_history">Smazat historii stahování</string>
     <string name="delete_downloaded_files">Smazat stažené soubory</string>
-    <string name="deleted_downloads">Smazat %1$d stahování</string>
     <string name="permission_display_over_apps">Souhlasit se zobrazením přes jiné aplikace</string>
     <string name="app_language_title">Jazyk aplikace</string>
     <string name="systems_language">Jazyk systému</string>
@@ -680,7 +676,7 @@
     <string name="youtube_music_premium_content">Toto video je dostupné jen členům YouTube Music Premium, a tak je NewPipe nemůže stáhnout ani přehrát.</string>
     <string name="private_content">Tento obsah je soukromý, a tak jej NewPipe nemůže stáhnout ani přehrát.</string>
     <string name="soundcloud_go_plus_content">Toto je stopa SoundCloud Go+, přinejmenším ve Vaší zemi, a tak ji NewPipe nemůže stáhnout ani přehrát.</string>
-    <string name="georestricted_content">Tento obsah není ve Vaší zemi k dispozici.</string>
+    <string name="georestricted_content">Tento obsah není ve vaší zemi dostupný.</string>
     <string name="show_channel_details">Zobrazit podrobnosti kanálu</string>
     <string name="recaptcha_solve">Vyřešit</string>
     <string name="restricted_video_no_stream">Toto video je věkově omezeno.
@@ -721,4 +717,11 @@
     <string name="on">Zapnuto</string>
     <string name="tablet_mode_title">Režim tabletu</string>
     <string name="feed_toggle_show_played_items">Ukázat přehrané položky</string>
+    <string name="dont_show">Nezobrazovat</string>
+    <string name="low_quality_smaller">Nízká kvalita (menší)</string>
+    <string name="high_quality_larger">Vysoká kvalita (větší)</string>
+    <string name="seekbar_preview_thumbnail_title">Náhled miniatur na vyhledávací liště</string>
+    <string name="comments_are_disabled">Komentáře jsou vypnuty</string>
+    <string name="detail_heart_img_view_description">Srdíčko od tvůrce</string>
+    <string name="mark_as_watched">Označit jako zhlédnuté</string>
 </resources>
