@@ -23,6 +23,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -40,6 +41,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -73,10 +75,10 @@ import org.schabi.newpipe.player.helper.PlayerHolder
 import org.schabi.newpipe.util.Localization
 import org.schabi.newpipe.util.NavigationHelper
 import org.schabi.newpipe.util.StreamDialogEntry
-import org.schabi.newpipe.util.ThemeHelper.getGridSpanCount
-import org.schabi.newpipe.util.ThemeHelper.shouldUseGridLayout
 import java.time.OffsetDateTime
 import java.util.ArrayList
+import kotlin.math.floor
+import kotlin.math.max
 
 class FeedFragment : BaseStateFragment<FeedState>() {
     private var _feedBinding: FragmentFeedBinding? = null
@@ -96,7 +98,6 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 
     private var onSettingsChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private var updateListViewModeOnResume = false
-    private var isRefreshing = false
 
     init {
         setHasOptionsMenu(true)
@@ -136,6 +137,19 @@ class FeedFragment : BaseStateFragment<FeedState>() {
             setOnItemLongClickListener(listenerStreamItem)
         }
 
+        // Scrolls to the top when a new item is inserted e.g. when refreshing
+        // Using a workaround from
+        // https://dev.to/aldok/how-to-scroll-recyclerview-to-a-certain-position-5ck4
+        // here - the underlying dataset must be ready for scrolling or else scrollToPosition fails
+        groupAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                feedBinding.itemsList.scrollToPosition(0)
+            }
+        })
+
         feedBinding.itemsList.adapter = groupAdapter
         setupListViewMode()
     }
@@ -161,9 +175,17 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 
     fun setupListViewMode() {
         // does everything needed to setup the layouts for grid or list modes
-        groupAdapter.spanCount = if (shouldUseGridLayout(context)) getGridSpanCount(context) else 1
+        groupAdapter.spanCount = if (shouldUseGridLayout()) getGridSpanCount() else 1
         feedBinding.itemsList.layoutManager = GridLayoutManager(requireContext(), groupAdapter.spanCount).apply {
             spanSizeLookup = groupAdapter.spanSizeLookup
+        }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+
+        if (!isVisibleToUser && view != null) {
+            updateRelativeTimeViews()
         }
     }
 
@@ -260,7 +282,6 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         feedBinding.refreshRootView.animate(false, 0)
         feedBinding.loadingProgressText.animate(true, 200)
         feedBinding.swipeRefreshLayout.isRefreshing = true
-        isRefreshing = true
     }
 
     override fun hideLoading() {
@@ -269,7 +290,6 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         feedBinding.refreshRootView.animate(true, 200)
         feedBinding.loadingProgressText.animate(false, 0)
         feedBinding.swipeRefreshLayout.isRefreshing = false
-        isRefreshing = false
     }
 
     override fun showEmptyState() {
@@ -296,14 +316,13 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         feedBinding.refreshRootView.animate(false, 0)
         feedBinding.loadingProgressText.animate(false, 0)
         feedBinding.swipeRefreshLayout.isRefreshing = false
-        isRefreshing = false
     }
 
     private fun handleProgressState(progressState: FeedState.ProgressState) {
         showLoading()
 
         val isIndeterminate = progressState.currentProgress == -1 &&
-            progressState.maxProgress == -1
+                progressState.maxProgress == -1
 
         feedBinding.loadingProgressText.text = if (!isIndeterminate) {
             "${progressState.currentProgress}/${progressState.maxProgress}"
@@ -314,7 +333,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         }
 
         feedBinding.loadingProgressBar.isIndeterminate = isIndeterminate ||
-            (progressState.maxProgress > 0 && progressState.currentProgress == 0)
+                (progressState.maxProgress > 0 && progressState.currentProgress == 0)
         feedBinding.loadingProgressBar.progress = progressState.currentProgress
 
         feedBinding.loadingProgressBar.max = progressState.maxProgress
@@ -349,11 +368,6 @@ class FeedFragment : BaseStateFragment<FeedState>() {
                 )
             )
         }
-        if (item.streamType != StreamType.AUDIO_LIVE_STREAM && item.streamType != StreamType.LIVE_STREAM) {
-            entries.add(
-                StreamDialogEntry.mark_as_watched
-            )
-        }
 
         StreamDialogEntry.setEnabledEntries(entries)
         InfoItemDialog(activity, item, StreamDialogEntry.getCommands(context)) { _, which ->
@@ -363,7 +377,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 
     private val listenerStreamItem = object : OnItemClickListener, OnItemLongClickListener {
         override fun onItemClick(item: Item<*>, view: View) {
-            if (item is StreamItem && !isRefreshing) {
+            if (item is StreamItem) {
                 val stream = item.streamWithState.stream
                 NavigationHelper.openVideoDetailFragment(
                     requireContext(), fm,
@@ -373,7 +387,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         }
 
         override fun onItemLongClick(item: Item<*>, view: View): Boolean {
-            if (item is StreamItem && !isRefreshing) {
+            if (item is StreamItem) {
                 showStreamDialog(item.streamWithState.stream.toStreamInfoItem())
                 return true
             }
@@ -384,7 +398,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
     @SuppressLint("StringFormatMatches")
     private fun handleLoadedState(loadedState: FeedState.LoadedState) {
 
-        val itemVersion = if (shouldUseGridLayout(context)) {
+        val itemVersion = if (shouldUseGridLayout()) {
             StreamItem.ItemVersion.GRID
         } else {
             StreamItem.ItemVersion.NORMAL
@@ -444,7 +458,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
-                            subscriptionEntity ->
+                                subscriptionEntity ->
                             handleFeedNotAvailable(
                                 subscriptionEntity,
                                 t.cause,
@@ -526,6 +540,35 @@ class FeedFragment : BaseStateFragment<FeedState>() {
             }
         )
         listState = null
+    }
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Grid Mode
+    // /////////////////////////////////////////////////////////////////////////
+
+    // TODO: Move these out of this class, as it can be reused
+
+    private fun shouldUseGridLayout(): Boolean {
+        val listMode = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getString(getString(R.string.list_view_mode_key), getString(R.string.list_view_mode_value))
+
+        return when (listMode) {
+            getString(R.string.list_view_mode_auto_key) -> {
+                val configuration = resources.configuration
+
+                (
+                        configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                                configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)
+                        )
+            }
+            getString(R.string.list_view_mode_grid_key) -> true
+            else -> false
+        }
+    }
+
+    private fun getGridSpanCount(): Int {
+        val minWidth = resources.getDimensionPixelSize(R.dimen.video_item_grid_thumbnail_image_width)
+        return max(1, floor(resources.displayMetrics.widthPixels / minWidth.toDouble()).toInt())
     }
 
     companion object {
