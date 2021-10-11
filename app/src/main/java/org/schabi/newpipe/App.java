@@ -5,11 +5,12 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.multidex.MultiDexApplication;
 import androidx.preference.PreferenceManager;
+
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import org.acra.ACRA;
 import org.acra.config.ACRAConfigurationException;
@@ -35,13 +36,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.exceptions.CompositeException;
 import io.reactivex.rxjava3.exceptions.MissingBackpressureException;
 import io.reactivex.rxjava3.exceptions.OnErrorNotImplementedException;
 import io.reactivex.rxjava3.exceptions.UndeliverableException;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+
+import static org.schabi.newpipe.CheckForNewAppVersion.startNewVersionCheckService;
 
 /*
  * Copyright (C) Hans-Christoph Steiner 2016 <hans@eds.org>
@@ -66,9 +68,6 @@ public class App extends MultiDexApplication {
     private static final String TAG = App.class.toString();
     private static App app;
 
-    @Nullable
-    private Disposable disposable = null;
-
     @NonNull
     public static App getApp() {
         return app;
@@ -85,6 +84,12 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         app = this;
+
+        if (ProcessPhoenix.isPhoenixProcess(this)) {
+            Log.i(TAG, "This is a phoenix process! "
+                    + "Aborting initialization of App[onCreate]");
+            return;
+        }
 
         // Initialize settings first because others inits can use its values
         NewPipeSettings.initSettings(this);
@@ -110,14 +115,11 @@ public class App extends MultiDexApplication {
         configureRxJavaErrorHandler();
 
         // Check for new version
-        disposable = CheckForNewAppVersion.checkNewVersion(this);
+        startNewVersionCheckService();
     }
 
     @Override
     public void onTerminate() {
-        if (disposable != null) {
-            disposable.dispose();
-        }
         super.onTerminate();
         PicassoHelper.terminate();
     }
